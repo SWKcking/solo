@@ -2,11 +2,11 @@ FROM maven:3.8.4-openjdk-11 as MVN_BUILD
 
 WORKDIR /opt/solo/
 ADD . /tmp
-RUN cd /tmp && mvn package -DskipTests -Pci -q && mv target/solo/* /opt/solo/ \
+RUN cd /tmp && mvn package -DskipTests -Pci -q -Xmx300m && mv target/solo/* /opt/solo/ \
 && cp -f /tmp/src/main/resources/docker/* /opt/solo/
 
-FROM openjdk:18-slim
-LABEL maintainer="Liang Ding<845765@qq.com>"
+FROM openjdk:17-jdk-slim
+LABEL maintainer="SWK<3321165151@qq.com>"
 
 WORKDIR /opt/solo/
 COPY --from=MVN_BUILD /opt/solo/ /opt/solo/
