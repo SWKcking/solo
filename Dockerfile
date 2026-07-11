@@ -5,7 +5,7 @@ ADD . /tmp
 RUN cd /tmp && mvn package -DskipTests -Pci -q -Xmx300m && mv target/solo/* /opt/solo/ \
 && cp -f /tmp/src/main/resources/docker/* /opt/solo/
 
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:21-jdk-jammy
 LABEL maintainer="SWK<3321165151@qq.com>"
 
 WORKDIR /opt/solo/
